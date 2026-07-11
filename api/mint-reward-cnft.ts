@@ -6,15 +6,35 @@
  * Deliberately demo-grade (devnet-only assets, IP rate limit). The
  * production path is the Supabase edge function, which verifies the
  * player's crystal balance server-side before minting.
+ *
+ * Self-contained on purpose: Vercel bundles npm imports for this entry
+ * file but does not emit sibling TS modules from outside /api, so the
+ * small mint core is inlined here (scripts use solana/lib/mint.ts).
  */
-import { publicKey } from '@metaplex-foundation/umi';
-import { loadUmi, mintTierTo, VALID_TIERS } from '../solana/lib/mint';
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
+import { keypairIdentity, publicKey } from '@metaplex-foundation/umi';
+import { base58 } from '@metaplex-foundation/umi/serializers';
+import {
+  mplBubblegum,
+  mintToCollectionV1,
+  parseLeafFromMintToCollectionV1Transaction,
+  findLeafAssetIdPda,
+} from '@metaplex-foundation/mpl-bubblegum';
+import { mplTokenMetadata } from '@metaplex-foundation/mpl-token-metadata';
+
+const TIER_NAMES: Record<number, string> = {
+  1: 'First Facet',
+  2: 'Crystal Collector',
+  3: 'Gem Guardian',
+  4: 'Master of Minds',
+  99: 'Monthly Champion',
+};
+const VALID_TIERS = new Set(Object.keys(TIER_NAMES).map(Number));
 
 interface MintRequest {
   method?: string;
   headers: Record<string, string | string[] | undefined>;
   body?: unknown;
-  socket?: { remoteAddress?: string };
 }
 
 interface MintResponse {
@@ -35,6 +55,13 @@ function rateLimited(ip: string): boolean {
   recent.push(now);
   hits.set(ip, recent);
   return false;
+}
+
+/** Accepts both base58 secrets and solana-keygen JSON arrays. */
+function decodeSecretKey(raw: string): Uint8Array {
+  const trimmed = raw.trim();
+  if (trimmed.startsWith('[')) return Uint8Array.from(JSON.parse(trimmed) as number[]);
+  return base58.serialize(trimmed);
 }
 
 export default async function handler(req: MintRequest, res: MintResponse): Promise<void> {
@@ -82,17 +109,39 @@ export default async function handler(req: MintRequest, res: MintResponse): Prom
   }
 
   const host = (Array.isArray(req.headers.host) ? req.headers.host[0] : req.headers.host) ?? '';
-  const baseUrl = process.env.PUBLIC_BASE_URL ?? (host ? `https://${host}` : 'https://archackathon-operatoruplift.vercel.app');
+  const baseUrl =
+    process.env.PUBLIC_BASE_URL ?? (host ? `https://${host}` : 'https://archackathon-operatoruplift.vercel.app');
 
   try {
-    const umi = loadUmi({ rpcUrl: SOLANA_RPC_URL, payerSecretKey: PAYER_SECRET_KEY });
-    const result = await mintTierTo(
-      umi,
-      { treeAddress: MERKLE_TREE_ADDRESS, collectionMint: COLLECTION_MINT_ADDRESS, baseUrl },
-      body.owner,
-      tier,
-    );
-    res.status(200).json({ signature: result.signature, assetId: result.assetId, network: 'devnet' });
+    const umi = createUmi(SOLANA_RPC_URL).use(mplBubblegum()).use(mplTokenMetadata());
+    const payer = umi.eddsa.createKeypairFromSecretKey(decodeSecretKey(PAYER_SECRET_KEY));
+    umi.use(keypairIdentity(payer));
+
+    const merkleTree = publicKey(MERKLE_TREE_ADDRESS);
+    const collectionMint = publicKey(COLLECTION_MINT_ADDRESS);
+
+    const { signature } = await mintToCollectionV1(umi, {
+      leafOwner: publicKey(body.owner),
+      merkleTree,
+      collectionMint,
+      metadata: {
+        name: `Crystal Z — ${TIER_NAMES[tier]}`,
+        symbol: 'CZ',
+        uri: `${baseUrl}/cnft/tier-${tier}.json`,
+        sellerFeeBasisPoints: 0,
+        collection: { key: collectionMint, verified: false },
+        creators: [{ address: umi.identity.publicKey, verified: false, share: 100 }],
+      },
+    }).sendAndConfirm(umi, { confirm: { commitment: 'confirmed' } });
+
+    const leaf = await parseLeafFromMintToCollectionV1Transaction(umi, signature);
+    const [assetId] = findLeafAssetIdPda(umi, { merkleTree, leafIndex: leaf.nonce });
+
+    res.status(200).json({
+      signature: base58.deserialize(signature)[0],
+      assetId: assetId.toString(),
+      network: 'devnet',
+    });
   } catch (err) {
     console.error('mint failed', err);
     res.status(502).json({ error: 'mint_failed' });
