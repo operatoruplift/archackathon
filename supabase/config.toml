@@ -1,0 +1,21 @@
+# Supabase local development configuration (supabase start)
+project_id = "crystal-z"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public"]
+
+[db]
+port = 54322
+major_version = 15
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+
+[functions.mint-reward-cnft]
+verify_jwt = true
+
+[functions.qr-auth-validate]
+verify_jwt = false

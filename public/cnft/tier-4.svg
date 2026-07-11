@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E3B49"/><stop offset="1" stop-color="#081E27"/>
+    </linearGradient>
+    <linearGradient id="gem" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#9BD3E4"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.45" r="0.6">
+      <stop offset="0" stop-color="#BFE8F2" stop-opacity="0.6"/><stop offset="1" stop-color="#BFE8F2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="800" rx="64" fill="url(#bg)"/>
+  <circle cx="400" cy="360" r="310" fill="url(#glow)"/>
+  <circle cx="400" cy="370" r="252" fill="none" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="4"/>
+  <circle cx="400" cy="370" r="272" fill="none" stroke="#FFFFFF" stroke-opacity="0.15" stroke-width="2"/>
+  <polygon points="400,120 560,270 505,600 295,600 240,270" fill="url(#gem)"/>
+  <polygon points="400,120 505,600 295,600" fill="#FFFFFF" opacity="0.45"/>
+  <polygon points="400,120 560,270 505,600" fill="#4E8496" opacity="0.3"/>
+  <path d="M614 156 l8 20 20 8 -20 8 -8 20 -8 -20 -20 -8 20 -8 z" fill="#FFFFFF" opacity="0.9"/>
+  <path d="M176 250 l6 15 15 6 -15 6 -6 15 -6 -15 -15 -6 15 -6 z" fill="#FFFFFF" opacity="0.7"/>
+  <path d="M620 520 l5 13 13 5 -13 5 -5 13 -5 -13 -13 -5 13 -5 z" fill="#FFFFFF" opacity="0.6"/>
+  <text x="400" y="690" text-anchor="middle" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#F6F1E7">Master of Minds</text>
+  <text x="400" y="738" text-anchor="middle" font-family="Verdana, sans-serif" font-size="20" letter-spacing="6" fill="#BFE8F2">CRYSTAL Z · TIER 4</text>
+</svg>

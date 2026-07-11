@@ -1,0 +1,11 @@
+{
+  "name": "Crystal Z Rewards",
+  "symbol": "CZ",
+  "description": "The on-chain reward layer of Crystal Z — cognitive training for 2,000 seniors and caregivers in Singapore. Compressed NFT milestone badges and monthly-winner vouchers on Solana.",
+  "image": "https://archackathon.vercel.app/cnft/tier-1.svg",
+  "external_url": "https://archackathon.vercel.app",
+  "properties": {
+    "files": [{ "uri": "https://archackathon.vercel.app/cnft/tier-1.svg", "type": "image/svg+xml" }],
+    "category": "image"
+  }
+}
