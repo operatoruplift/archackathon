@@ -131,7 +131,7 @@ Deno.serve(async (req) => {
     if (!payerSecret || !treeAddress || !collectionMint) {
       return json({ error: 'mint_not_configured' }, 503);
     }
-    const baseUrl = Deno.env.get('PUBLIC_BASE_URL') ?? 'https://archackathon.vercel.app';
+    const baseUrl = Deno.env.get('PUBLIC_BASE_URL') ?? 'https://archackathon-operatoruplift.vercel.app';
 
     const payer = umiBase.eddsa.createKeypairFromSecretKey(base58.serialize(payerSecret));
     const umi = umiBase.use(keypairIdentity(payer));

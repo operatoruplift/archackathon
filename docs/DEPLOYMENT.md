@@ -27,8 +27,8 @@ Push to `main` → Vercel builds the Vite app. No env vars needed.
    ```
 4. Redeploy. Demo-mode mints now hit devnet for real; celebration shows explorer links.
 
-If the deployed domain differs from `archackathon.vercel.app`, update the absolute
-image/external URLs in `public/cnft/*.json` so wallets and DAS render badge art.
+If the deployed domain differs from `archackathon-operatoruplift.vercel.app`, update the
+absolute image/external URLs in `public/cnft/*.json` so wallets and DAS render badge art.
 
 ## Tier 2 — Full production path (Supabase)
 

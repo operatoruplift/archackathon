@@ -2,15 +2,15 @@
   "name": "Crystal Z — Gem Guardian",
   "symbol": "CZ",
   "description": "Milestone badge earned in the Crystal Z brain-training arcade for Singapore's eldercare community. 150 Crystals. Minted during the Arc NS Buildathon 2026.",
-  "image": "https://archackathon.vercel.app/cnft/tier-3.svg",
-  "external_url": "https://archackathon.vercel.app",
+  "image": "https://archackathon-operatoruplift.vercel.app/cnft/tier-3.svg",
+  "external_url": "https://archackathon-operatoruplift.vercel.app",
   "attributes": [
     { "trait_type": "Tier", "value": "3" },
     { "trait_type": "Milestone", "value": "150 Crystals" },
     { "trait_type": "Program", "value": "Healthy Tec Community" }
   ],
   "properties": {
-    "files": [{ "uri": "https://archackathon.vercel.app/cnft/tier-3.svg", "type": "image/svg+xml" }],
+    "files": [{ "uri": "https://archackathon-operatoruplift.vercel.app/cnft/tier-3.svg", "type": "image/svg+xml" }],
     "category": "image"
   }
 }

@@ -10,7 +10,7 @@ import { loadUmi, mintTierTo, TIER_NAMES } from '../lib/mint';
 
 const ADDRESSES_PATH = path.resolve('solana/addresses.json');
 const PAYER_PATH = path.resolve('solana/.keys/payer.json');
-const BASE_URL = process.env.PUBLIC_BASE_URL ?? 'https://archackathon.vercel.app';
+const BASE_URL = process.env.PUBLIC_BASE_URL ?? 'https://archackathon-operatoruplift.vercel.app';
 
 function argValue(flag: string): string | undefined {
   const index = process.argv.indexOf(flag);

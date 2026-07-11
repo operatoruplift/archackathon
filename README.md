@@ -2,7 +2,7 @@
 
 **Crystals on Solana.** An extension of the Crystal Z cognitive-training arcade — 12 brain games, 2,000 seniors and caregivers in Singapore, a live off-chain Crystal ledger with real-world voucher redemption — introducing Solana-powered rewards built during the 9-hour Ârc NS Buildathon (11–12 July 2026).
 
-**Live demo:** https://archackathon.vercel.app · works instantly in zero-config **Demo Mode**; connect Supabase + devnet keys for real on-chain mints.
+**Live demo:** https://archackathon-operatoruplift.vercel.app · works instantly in zero-config **Demo Mode**; connect Supabase + devnet keys for real on-chain mints.
 
 ## 🌟 The Innovation
 

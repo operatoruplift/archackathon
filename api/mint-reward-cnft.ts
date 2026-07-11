@@ -82,7 +82,7 @@ export default async function handler(req: MintRequest, res: MintResponse): Prom
   }
 
   const host = (Array.isArray(req.headers.host) ? req.headers.host[0] : req.headers.host) ?? '';
-  const baseUrl = process.env.PUBLIC_BASE_URL ?? (host ? `https://${host}` : 'https://archackathon.vercel.app');
+  const baseUrl = process.env.PUBLIC_BASE_URL ?? (host ? `https://${host}` : 'https://archackathon-operatoruplift.vercel.app');
 
   try {
     const umi = loadUmi({ rpcUrl: SOLANA_RPC_URL, payerSecretKey: PAYER_SECRET_KEY });

@@ -16,7 +16,7 @@ import { createNft, mplTokenMetadata } from '@metaplex-foundation/mpl-token-meta
 import { encodeBase58 } from '../lib/mint';
 
 const RPC_URL = process.env.SOLANA_RPC_URL ?? 'https://api.devnet.solana.com';
-const BASE_URL = process.env.PUBLIC_BASE_URL ?? 'https://archackathon.vercel.app';
+const BASE_URL = process.env.PUBLIC_BASE_URL ?? 'https://archackathon-operatoruplift.vercel.app';
 const KEYS_DIR = path.resolve('solana/.keys');
 const PAYER_PATH = path.join(KEYS_DIR, 'payer.json');
 const ADDRESSES_PATH = path.resolve('solana/addresses.json');
