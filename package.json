@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Crystal Z — brain-training arcade for seniors with Solana cNFT rewards. Arc NS Buildathon 2026.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/operatoruplift/archackathon.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -p tsconfig.json && vite build",
